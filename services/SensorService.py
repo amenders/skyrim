@@ -13,9 +13,3 @@ class SensorService:
 
     def getHumidity(self):
         return self.sensors.get_humidity()
-
-    def getOrientation(self):
-        for i in range(0,20):
-            orientation = self.sensors.get_orientation()
-
-        return orientation
