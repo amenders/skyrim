@@ -1,4 +1,7 @@
 from services.LogService import LogService
 from services.SensorService import SensorService
-from time import sleep
-from picamera import PiCamera
+from services.CameraService import CameraService
+
+camera = CameraService("/home/pi/Desktop/mymovie.mjpeg")
+
+camera.takeVideo(6)
