@@ -1,2 +1,0 @@
-timestamp, this, that, these, those
-2019-08-18 05:26:57.874175, some, text, to, read

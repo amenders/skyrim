@@ -2,23 +2,29 @@ from picamera import PiCamera
 from time import sleep
 from multiprocessing import Process
 
+def recordProcess(duration, path, count):
+    camera = PiCamera()
+    camera.start_recording("{0}/video_{1}_working.h264".format(path, count))
+    sleep(duration)
+    camera.stop_recording()
+
 class CameraService:
 
     def __init__(self, _storagePath):
         self.imageCount = 0
-        self.storagePath = _storagePath
-        self.camera = PiCamera()
+        self.imagePath = _storagePath + "/images"
+        self.videoPath = _storagePath + "/videos"
+        #self.camera = PiCamera()
+        self.imageCount = 0
+        self.videoCount = 0
 
     def takePicture(self):
-        self.camera.capture(storagePath)
+        self.camera.capture("{0}/image_{1}.jpg".format(self.imagePath, self.imageCount))
+        self.imageCount += 1
 
     def takeVideo(self, duration):
-        video = Process(target=self.recordProcess, args=(self,duration,))
-        video.start()
-        video.join()
+        action = Process(target=recordProcess, args=(duration, self.videoPath, self.videoCount))
+        action.start()
+        action.join()
 
-    def recordProcess(self, duration):
-        self.camera.start_recording(self.storagePath)
-        sleep(duration)
-        self.camera.stop_recording()
         
